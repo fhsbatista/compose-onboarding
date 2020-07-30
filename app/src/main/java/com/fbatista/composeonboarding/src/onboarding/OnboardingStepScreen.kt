@@ -1,4 +1,4 @@
-package com.fbatista.composeonboarding.src.onboarding.composables
+package com.fbatista.composeonboarding.src.onboarding
 
 import androidx.annotation.DrawableRes
 import androidx.compose.Composable
@@ -6,17 +6,26 @@ import androidx.ui.core.Alignment
 import androidx.ui.core.Modifier
 import androidx.ui.foundation.Image
 import androidx.ui.foundation.Text
-import androidx.ui.graphics.Color
-import androidx.ui.layout.*
+import androidx.ui.layout.Arrangement
+import androidx.ui.layout.Column
+import androidx.ui.layout.fillMaxWidth
+import androidx.ui.layout.padding
 import androidx.ui.material.Typography
 import androidx.ui.res.imageResource
 import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.dp
-import com.fbatista.composeonboarding.R
 
 @Composable
-fun Tutorial(
-    backgroundColor: Color,
+fun OnboardingStepScreen(step: OnboardingStep) {
+    Content(
+        title = step.title,
+        subtitle = step.subtitle,
+        image = step.imageRes
+    )
+}
+
+@Composable
+private fun Content(
     title: String,
     subtitle: String,
     @DrawableRes image: Int
@@ -27,7 +36,6 @@ fun Tutorial(
         horizontalGravity = Alignment.CenterHorizontally,
         modifier = Modifier
             .padding(16.dp)
-            .fillMaxHeight()
             .fillMaxWidth()
     ) {
         Image(imageResource(image))
@@ -46,11 +54,6 @@ fun Tutorial(
 
 @Preview
 @Composable
-fun DisplayTutorial() {
-    Tutorial(
-        backgroundColor = Color.Cyan,
-        title = "Get more support",
-        subtitle = "With us you don't have to worry, we'll always be available and ready to help you whenever you need",
-        image = R.drawable.ic_launcher_foreground
-    )
+fun DisplayContent() {
+    OnboardingStepScreen(OnboardingStep.STEP_1)
 }
